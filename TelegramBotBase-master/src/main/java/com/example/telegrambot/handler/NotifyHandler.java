@@ -19,7 +19,7 @@ public class NotifyHandler extends AbstractHandler {
     public String operate(String chatId, ParsedCommand parsedCommand, Update update) {
         String text = parsedCommand.getText();
         if ("".equals(text))
-            return "You must specify the delay time. Like this:\n" +
+            return "Você precisa espcificar o tempo de espera. Por Exemplo:\n" +
                     "/notify 30";
         long timeInSec;
         try {
