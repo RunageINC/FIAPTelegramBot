@@ -2,16 +2,16 @@ package com.fiap.telegrambot.core;
 
 import java.util.List;
 
+
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.response.BaseResponse;
 import com.pengrad.telegrambot.response.GetUpdatesResponse;
 import com.pengrad.telegrambot.response.SendResponse;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class TelegramActionControl {
 
+	
+	
 	private TelegramBotCore core;
 	private GetUpdatesResponse updatesResponse;
 	private SendResponse sendResponse;
@@ -31,12 +31,10 @@ public class TelegramActionControl {
 				core.addToOffset(update.updateId() + 1);
 				
 				baseResponse = core.executeResponse(update);
-				
-				log.info("Response");
+				System.out.println("Response base stat ok: " + baseResponse.isOk());
 				
 				sendResponse = core.sendMessage(update, "Hello");
-				
-				log.info("Message send stats ok: {[]}");
+				System.out.println("Response send stat ok: " + sendResponse.isOk());
 			}
 		}
 	}
