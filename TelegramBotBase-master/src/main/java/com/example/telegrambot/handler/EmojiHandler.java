@@ -23,7 +23,7 @@ public class EmojiHandler extends AbstractHandler {
         String text = parsedCommand.getText();
         StringBuilder result = new StringBuilder();
         Set<String> emojisInTextUnique = new HashSet<>(EmojiParser.extractEmojis(text));
-        if (emojisInTextUnique.size() > 0) result.append("Parsed emojies from message:").append("\n");
+        if (emojisInTextUnique.size() > 0) result.append("Traduzindo emoji para mensagens:").append("\n");
         for (String emojiUnicode : emojisInTextUnique) {
             Emoji byUnicode = EmojiManager.getByUnicode(emojiUnicode);
             log.debug(byUnicode.toString());
