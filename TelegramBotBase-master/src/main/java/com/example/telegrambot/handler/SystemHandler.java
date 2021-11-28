@@ -40,7 +40,7 @@ public class SystemHandler extends AbstractHandler {
         sendMessage.enableMarkdown(true);
 
         StringBuilder text = new StringBuilder();
-        text.append("*This is help message*").append(END_LINE).append(END_LINE);
+        text.append("*Esta é a mensagem de ajuda *").append(END_LINE).append(END_LINE);
         text.append("[/start](/start) - Mostra mensagem de início").append(END_LINE);
         text.append("[/help](/help) - Mostra mensagem de Ajuda").append(END_LINE);
         text.append("[/id](/id) - Retorna seu ID do telegram ").append(END_LINE);
