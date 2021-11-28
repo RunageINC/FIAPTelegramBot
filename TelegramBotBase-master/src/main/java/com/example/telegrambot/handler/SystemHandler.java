@@ -41,10 +41,10 @@ public class SystemHandler extends AbstractHandler {
 
         StringBuilder text = new StringBuilder();
         text.append("*This is help message*").append(END_LINE).append(END_LINE);
-        text.append("[/start](/start) - show start message").append(END_LINE);
-        text.append("[/help](/help) - show help message").append(END_LINE);
-        text.append("[/id](/id) - know your ID in telegram ").append(END_LINE);
-        text.append("/*notify* _time-in-sec_  - receive notification from me after the specified time").append(END_LINE);
+        text.append("[/start](/start) - Mostra mensagem de início").append(END_LINE);
+        text.append("[/help](/help) - Mostra mensagem de Ajuda").append(END_LINE);
+        text.append("[/id](/id) - Retorna seu ID do telegram ").append(END_LINE);
+        text.append("/*notify* _time-in-sec_  - Recebe uma notificação minha após o tempo específico informado").append(END_LINE);
         text.append("/*cep* _codigo-postal-string_  - consulta informações sobre o CEP informado").append(END_LINE);
 
         sendMessage.setText(text.toString());
