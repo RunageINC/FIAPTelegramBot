@@ -27,7 +27,7 @@ public class SystemHandler extends AbstractHandler {
                 bot.sendQueue.add(getMessageHelp(chatId));
                 break;
             case ID:
-                return "Your telegramID: " + update.getMessage().getFrom().getId();
+                return "Seu telegramID: " + update.getMessage().getFrom().getId();
             case STICKER:
                 return "StickerID: " + parsedCommand.getText();
         }
