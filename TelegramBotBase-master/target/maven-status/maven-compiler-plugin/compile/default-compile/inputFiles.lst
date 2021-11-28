@@ -1,0 +1,17 @@
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/bot/Bot.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/cep/CepUtils.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/command/Parser.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/service/MessageReciever.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/service/MessageSender.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/handler/EmojiHandler.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/handler/AbstractHandler.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/ability/Notify.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/handler/NotifyHandler.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/ability/Stickers.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/command/ParsedCommand.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/cep/Webservicecep.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/command/Command.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/handler/DefaultHandler.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/handler/CEPHandler.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/handler/SystemHandler.java
+/home/lugamvazori/projetos/TelegramBotBase-master/src/main/java/com/example/telegrambot/App.java
