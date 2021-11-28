@@ -34,7 +34,7 @@ public class CEPHandler extends AbstractHandler {
     public String operate(String chatId, ParsedCommand parsedCommand, Update update) {
         String text = parsedCommand.getText();
         if ("".equals(text)) {
-            return "You must specify the delay time. Like this:\n"
+            return "Você precisa especificar o número do CEP. Exemplo:\n"
                     + "/cep 05629040";
         }
 //        long timeInSec;
