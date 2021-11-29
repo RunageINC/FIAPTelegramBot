@@ -2,7 +2,7 @@ package com.fiap.telegrambot.util;
 
 public enum ResourcesUtil {
 
-	RESOURCES_PATH("res/"),
+	RESOURCES_PATH("resources/"),
 	TEXT_FILENAME("messages.txt"),
 	TOKEN("2117476942:AAG6Tg1IbPqbwzPoY9m85_QZrdjvpA0hteg");
 	
