@@ -41,13 +41,13 @@ public class TelegramBotCore extends TelegramLongPollingBot {
 	@Override
 	public String getBotUsername() {
 		log.debug("Bot name: " + botName);
-		return null;
+		return botName;
 	}
 
 	@Override
 	public String getBotToken() {
 		log.debug("Bot token: " + botToken);
-		return null;
+		return botToken;
 	}
 	
 	public void connect() {
