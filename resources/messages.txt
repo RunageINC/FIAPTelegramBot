@@ -1,0 +1,5 @@
+[/start](/start) - Mostro uma mensagem de início
+[/help](/help) - Mostro uma mensagem de ajuda
+[/id](/id) - Saiba seu ID do telegram
+/*notify* _time-in-sec_  - Te mando uma notificaçao depois de um tempo
+/*cep* _codigo-postal-string_  - Consulto informações sobre o CEP informado

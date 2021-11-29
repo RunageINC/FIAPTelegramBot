@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.telegram.telegrambots.api.objects.Update;
 
 import com.fiap.telegrambot.core.TelegramBotCore;
+import com.fiap.telegrambot.util.MessagesEnum;
 import com.fiap.telegrambot.util.ParsedCommand;
 import com.vdurmont.emoji.Emoji;
 import com.vdurmont.emoji.EmojiManager;
@@ -25,7 +26,7 @@ public class EmojiHandler extends AbstractHandler {
 	        String text = parsedCommand.getText();
 	        StringBuilder result = new StringBuilder();
 	        Set<String> emojisInTextUnique = new HashSet<>(EmojiParser.extractEmojis(text));
-	        if (emojisInTextUnique.size() > 0) result.append("Parsed emojies from message:").append("\n");
+	        if (emojisInTextUnique.size() > 0) result.append(MessagesEnum.EMOJI_MESSAGE.getValue()).append("\n");
 	        for (String emojiUnicode : emojisInTextUnique) {
 	            Emoji byUnicode = EmojiManager.getByUnicode(emojiUnicode);
 	            log.debug(byUnicode.toString());

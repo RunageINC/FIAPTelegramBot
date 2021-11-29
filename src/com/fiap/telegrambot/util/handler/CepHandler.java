@@ -14,6 +14,7 @@ import org.telegram.telegrambots.api.objects.Update;
 import com.fiap.telegrambot.core.TelegramBotCore;
 import com.fiap.telegrambot.service.Webservicecep;
 import com.fiap.telegrambot.util.CepUtils;
+import com.fiap.telegrambot.util.MessagesEnum;
 import com.fiap.telegrambot.util.ParsedCommand;
 
 public class CepHandler extends AbstractHandler {
@@ -29,10 +30,11 @@ public class CepHandler extends AbstractHandler {
     public String operate(String chatId, ParsedCommand command, Update update) {
         String cepValue = command.getText();
         if ("".equals(cepValue)) {
-            return "Você precisa especificar o número do CEP. Exemplo:\n"
-                    + "/cep 05629040";
+            return MessagesEnum.CEP_ERROR_MESSAGE.getValue();
         }
-        cepValue = cepValue.replace("-", ""); 
+        
+        if (cepValue.contains("-"))
+        	cepValue = cepValue.replace("-", ""); 
 
         if (cepValue.length() != 8) {
             return WRONG_INPUT_MESSAGE;

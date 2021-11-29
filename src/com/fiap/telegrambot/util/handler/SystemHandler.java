@@ -1,11 +1,16 @@
 package com.fiap.telegrambot.util.handler;
 
+import java.io.IOException;
+import java.util.Set;
+
 import org.apache.log4j.Logger;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 
 import com.fiap.telegrambot.core.TelegramBotCore;
 import com.fiap.telegrambot.util.Command;
+import com.fiap.telegrambot.util.MessagesEnum;
+import com.fiap.telegrambot.util.MessagesUtil;
 import com.fiap.telegrambot.util.ParsedCommand;
 
 public class SystemHandler extends AbstractHandler {
@@ -29,7 +34,7 @@ public class SystemHandler extends AbstractHandler {
 	                bot.sendQueue.add(getMessageHelp(chatId));
 	                break;
 	            case ID:
-	                return "Your telegramID: " + update.getMessage().getFrom().getId();
+	                return MessagesEnum.TELEGRAM_ID_MESSAGE.getValue() + update.getMessage().getFrom().getId();
 	            case STICKER:
 	                return "StickerID: " + parsedCommand.getText();
 	        }
@@ -40,17 +45,24 @@ public class SystemHandler extends AbstractHandler {
 	        SendMessage sendMessage = new SendMessage();
 	        sendMessage.setChatId(chatID);
 	        sendMessage.enableMarkdown(true);
+	        
+	        try {
+				Set<String> messages = MessagesUtil.getMessages();
+				
+				StringBuilder text = new StringBuilder();
+		        text.append(MessagesEnum.ENTRY_MESSAGE.getValue()).append(END_LINE).append(END_LINE);
+		        
+		        for (String command : messages) {
+		        	text.append(command).append(END_LINE);
+		        }
 
-	        StringBuilder text = new StringBuilder();
-	        text.append("*This is help message*").append(END_LINE).append(END_LINE);
-	        text.append("[/start](/start) - show start message").append(END_LINE);
-	        text.append("[/help](/help) - show help message").append(END_LINE);
-	        text.append("[/id](/id) - know your ID in telegram ").append(END_LINE);
-	        text.append("/*notify* _time-in-sec_  - receive notification from me after the specified time").append(END_LINE);
-	        text.append("/*cep* _codigo-postal-string_  - consulta informações sobre o CEP informado").append(END_LINE);
+		        sendMessage.setText(text.toString());
+		        return sendMessage;
 
-	        sendMessage.setText(text.toString());
-	        return sendMessage;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			}
 	    }
 
 	    private SendMessage getMessageStart(String chatID) {
