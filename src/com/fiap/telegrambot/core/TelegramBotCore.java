@@ -33,6 +33,7 @@ public class TelegramBotCore extends TelegramLongPollingBot {
 		this.botToken = botToken;
 	}
 	
+        @Override
 	public void onUpdateReceived(Update update) {
 		log.debug("New update - " + update.getUpdateId());
 		receiveQueue.add(update);

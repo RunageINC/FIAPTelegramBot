@@ -6,7 +6,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import com.fiap.telegrambot.service.WebServiceCep;
+import com.fiap.telegrambot.service.Webservicecep;
 
 
 /**
@@ -25,11 +25,11 @@ public class CepUtils {
      * @throws JAXBException
      * @throws MalformedURLException
      */
-    public static WebServiceCep getEndereco(String cep) throws JAXBException, MalformedURLException {
-        JAXBContext jc = JAXBContext.newInstance(WebServiceCep.class);
+    public static Webservicecep getEndereco(String cep) throws JAXBException, MalformedURLException {
+        JAXBContext jc = JAXBContext.newInstance(Webservicecep.class);
         Unmarshaller u = jc.createUnmarshaller();
         URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=xml");
-        WebServiceCep wCep = (WebServiceCep) u.unmarshal(url);
+        Webservicecep wCep = (Webservicecep) u.unmarshal(url);
         return wCep;
     }
 
@@ -39,7 +39,7 @@ public class CepUtils {
      * @param result
      * @return
      */
-    public static StringBuilder fillCEP(WebServiceCep result) {
+    public static StringBuilder fillCEP(Webservicecep result) {
         StringBuilder sb = new StringBuilder();
         if (result != null) {
             sb.append("Estado: ").append(result.getUf());

@@ -12,14 +12,14 @@ import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
 
 import com.fiap.telegrambot.core.TelegramBotCore;
-import com.fiap.telegrambot.service.WebServiceCep;
+import com.fiap.telegrambot.service.Webservicecep;
 import com.fiap.telegrambot.util.CepUtils;
 import com.fiap.telegrambot.util.ParsedCommand;
 
 public class CepHandler extends AbstractHandler {
 
-	private static final Logger log = Logger.getLogger(CepHandler.class);
-	private String WRONG_INPUT_MESSAGE = "CEP invalido. ";
+    private static final Logger log = Logger.getLogger(CepHandler.class);
+    private String WRONG_INPUT_MESSAGE = "CEP invalido. ";
 
     public CepHandler(TelegramBotCore bot) {
         super(bot);
@@ -27,23 +27,19 @@ public class CepHandler extends AbstractHandler {
 
     @Override
     public String operate(String chatId, ParsedCommand command, Update update) {
-        String text = command.getText();
-        if ("".equals(text)) {
+        String cepValue = command.getText();
+        if ("".equals(cepValue)) {
             return "Você precisa especificar o número do CEP. Exemplo:\n"
                     + "/cep 05629040";
         }
-//        long timeInSec;
-        String cepValue;
 
-        if (text.length() > 8 || text.length() < 8) {
+        if (cepValue.length() > 8 || cepValue.length() < 8) {
             return WRONG_INPUT_MESSAGE;
         }
-        if (text.contains("^[a-Z]")) {
+        if (cepValue.contains("^[a-Z]")) {
             return WRONG_INPUT_MESSAGE;
         }
-        
 
-        cepValue = text.trim();
         if (cepValue != null && !cepValue.isEmpty()) {
             bot.sendQueue.add(getMessageCEP(chatId, cepValue));
         }
@@ -56,7 +52,7 @@ public class CepHandler extends AbstractHandler {
             sendMessage.setChatId(chatID);
             sendMessage.enableMarkdown(true);
 
-            WebServiceCep result = CepUtils.getEndereco(cepValue.replace("-", ""));
+            Webservicecep result = CepUtils.getEndereco(cepValue.replace("-", ""));
             StringBuilder sb = fillCEP(result);
 
             sendMessage.setText(sb.toString());
