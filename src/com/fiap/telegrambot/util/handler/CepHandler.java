@@ -32,8 +32,9 @@ public class CepHandler extends AbstractHandler {
             return "Você precisa especificar o número do CEP. Exemplo:\n"
                     + "/cep 05629040";
         }
+        cepValue = cepValue.replace("-", "");
 
-        if (cepValue.length() > 8 || cepValue.length() < 8) {
+        if (cepValue.length() != 8) {
             return WRONG_INPUT_MESSAGE;
         }
         if (cepValue.contains("^[a-Z]")) {
