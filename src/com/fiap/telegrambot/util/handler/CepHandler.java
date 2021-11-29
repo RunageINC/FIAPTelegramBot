@@ -33,8 +33,7 @@ public class CepHandler extends AbstractHandler {
             return MessagesEnum.CEP_ERROR_MESSAGE.getValue();
         }
         
-        if (cepValue.contains("-"))
-        	cepValue = cepValue.replace("-", ""); 
+        cepValue = cepValue.replace("-", ""); 
 
         if (cepValue.length() != 8) {
             return WRONG_INPUT_MESSAGE;
