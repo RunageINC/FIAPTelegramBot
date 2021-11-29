@@ -1,48 +1,74 @@
 package com.fiap.telegrambot.core;
 
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.model.request.ChatAction;
-import com.pengrad.telegrambot.request.GetUpdates;
-import com.pengrad.telegrambot.request.SendChatAction;
-import com.pengrad.telegrambot.request.SendMessage;
-import com.pengrad.telegrambot.response.BaseResponse;
-import com.pengrad.telegrambot.response.GetUpdatesResponse;
-import com.pengrad.telegrambot.response.SendResponse;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedDeque;
+
+import org.apache.log4j.Logger;
+import org.telegram.telegrambots.TelegramBotsApi;
+import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class TelegramBotCore {
+@NoArgsConstructor
+public class TelegramBotCore extends TelegramLongPollingBot {
 
-	private TelegramBot bot;
+	private static final Logger log = Logger.getLogger(TelegramBotCore.class);
+	private final int RECONNECT_PAUSE = 10000;
+
+	@Setter @Getter
+	private String botName;
 	
-	int messageOffset;
+	@Setter
+	private String botToken;
 	
-	public TelegramBotCore(TelegramBot bot, String accessToken) {
-		this.messageOffset = 0;
-		this.bot = new TelegramBot(accessToken);
+	public final Queue<Object> sendQueue = new ConcurrentLinkedDeque<>();
+	public final Queue<Object> receiveQueue = new ConcurrentLinkedDeque<>();
+	
+	public TelegramBotCore(String botName, String botToken) {
+		this.botName = botName;
+		this.botToken = botToken;
 	}
 	
-	public TelegramBotCore(String accessToken) {
-		this.bot = new TelegramBot(accessToken);
+        @Override
+	public void onUpdateReceived(Update update) {
+		log.debug("New update - " + update.getUpdateId());
+		receiveQueue.add(update);
+	}
+
+	@Override
+	public String getBotUsername() {
+		log.debug("Bot name: " + botName);
+		return botName;
+	}
+
+	@Override
+	public String getBotToken() {
+		log.debug("Bot token: " + botToken);
+		return botToken;
 	}
 	
-	public void addToOffset(int value) {
-		this.messageOffset = value;
-	}
-	
-	public GetUpdatesResponse executeMessageGathering(int messageLimit) {
-		return this.bot.execute(new GetUpdates().limit(messageLimit).offset(messageOffset));
-	}
-	
-	public BaseResponse executeResponse (Update update) {
-		return this.bot.execute(new SendChatAction(update.message().chat().id(), ChatAction.typing.name()));
-	}
-	
-	public SendResponse sendMessage(Update update, String message) {
-		return this.bot.execute(new SendMessage(update.message().chat().id(), message));
+	public void connect() {
+		final TelegramBotsApi api;
+		
+		try {
+			api = new TelegramBotsApi();
+			api.registerBot(this);
+			log.info("Started Telegram API. Bot Connected: " + this);
+		} catch (TelegramApiException e) {
+			log.error("Error while connecting. Pause of : " + RECONNECT_PAUSE / 1000 + " second and then trying. Error: " + e.getMessage());
+			
+			try {
+				Thread.sleep(RECONNECT_PAUSE);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+				return;
+			}
+			
+			connect();
+		}
 	}
 }
