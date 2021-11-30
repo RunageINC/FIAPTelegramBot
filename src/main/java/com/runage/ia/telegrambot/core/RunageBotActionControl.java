@@ -34,29 +34,31 @@ public class RunageBotActionControl {
 		SendMessage message = SendMessage.builder().chatId(Long.toString(chatId)).text(interpret(userText, chatId))
 				.build();
 
-		ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-
-		List<KeyboardRow> keyboard = new ArrayList<>();
-
-		KeyboardRow row = new KeyboardRow();
-
-		row.add(BotOptions.CUMPLIMENT.getOption());
-		row.add(BotOptions.CEP.getOption());
-		row.add(BotOptions.HOW_ARE_YOU.getOption());
-
-		keyboard.add(row);
-
-		row = new KeyboardRow();
-
-		row.add(BotOptions.WEATHER.getOption());
-		row.add(BotOptions.HELP.getOption());
-		row.add(BotOptions.DIRECTIONS.getOption());
-
-		keyboard.add(row);
-
-		keyboardMarkup.setKeyboard(keyboard);
-
-		message.setReplyMarkup(keyboardMarkup);
+		if (state == States.ENTRY) {
+			ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+			
+			List<KeyboardRow> keyboard = new ArrayList<>();
+			
+			KeyboardRow row = new KeyboardRow();
+			
+			row.add(BotOptions.CUMPLIMENT.getOption());
+			row.add(BotOptions.CEP.getOption());
+			row.add(BotOptions.HOW_ARE_YOU.getOption());
+			
+			keyboard.add(row);
+			
+			row = new KeyboardRow();
+			
+			row.add(BotOptions.WEATHER.getOption());
+			row.add(BotOptions.HELP.getOption());
+			row.add(BotOptions.DIRECTIONS.getOption());
+			
+			keyboard.add(row);
+			
+			keyboardMarkup.setKeyboard(keyboard);
+			
+			message.setReplyMarkup(keyboardMarkup);
+		}
 
 		return message;
 	}
